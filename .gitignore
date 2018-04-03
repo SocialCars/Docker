@@ -1,4 +1,4 @@
 *.*
 !.gitignore
-!LICENSE
+!Dockerfile
 !README.md
