@@ -8,14 +8,14 @@ ENV GLIBC_VERSION 2.27-r0
 ENV TEX_SCHEME minimal
 
 # --- TeX and apk package dependencies / installation section --------
-RUN wget -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub
-RUN wget -O /tmp/glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk
-RUN wget -O /tmp/glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-bin-$GLIBC_VERSION.apk
-RUN wget -O /tmp/glibc-i18n.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-i18n-$GLIBC_VERSION.apk
+RUN wget -t 3 -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub
+RUN wget -t 3 -O /tmp/glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk
+RUN wget -t 3 -O /tmp/glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-bin-$GLIBC_VERSION.apk
+RUN wget -t 3 -O /tmp/glibc-i18n.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-i18n-$GLIBC_VERSION.apk
 
 RUN apk --no-cache update &&\
     apk --no-cache upgrade &&\
-    apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --update --no-cache add ca-certificates bash curl wget git openssh-client gnupg perl go /tmp/glibc.apk /tmp/glibc-bin.apk /tmp/glibc-i18n.apk musl-dev ttf-mononoki
+    apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --update --no-cache add ca-certificates bash curl git openssh-client gnupg perl go /tmp/glibc.apk /tmp/glibc-bin.apk /tmp/glibc-i18n.apk musl-dev ttf-mononoki
 
 RUN /usr/glibc-compat/bin/localedef -i en_US -f UTF-8 en_US.UTF-8
 
