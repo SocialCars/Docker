@@ -31,4 +31,4 @@ ENV PATH /usr/local/texlive/bin/x86_64-linux:/root/go/bin:$PATH
 RUN tlmgr update --self --all --reinstall-forcibly-removed
 RUN tlmgr install capt-of fncychap framed latexmk needspace tabulary titlesec varwidth wrapfig collection-fontsrecommended
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
