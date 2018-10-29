@@ -1,8 +1,8 @@
 FROM alpine:edge
 
 ENV SUMO_VERSION 0_32_0
-ENV XERCES_VERSION 3.2.1
-ENV PROJ_VERSION 5.1.0
+ENV XERCES_VERSION 3.2.2
+ENV PROJ_VERSION 5.2.0
 ENV SUMO_HOME /opt/sumo
 
 # from https://github.com/docker-library/python/blob/7a794688c7246e7eff898f5288716a3e7dc08484/3.7/alpine3.8/Dockerfile
@@ -133,7 +133,7 @@ RUN apk -X http://dl-cdn.alpinelinux.org/alpine/edge/testing --update --no-cache
 
 # Install not packaged dependencies
 WORKDIR /tmp
-RUN wget -t 3 http://www-us.apache.org/dist/xerces/c/3/sources/xerces-c-$XERCES_VERSION.tar.xz -O /tmp/xerces-c-$XERCES_VERSION.tar.xz &&\
+RUN wget -t 3 https://www-us.apache.org/dist/xerces/c/3/sources/xerces-c-$XERCES_VERSION.tar.xz -O /tmp/xerces-c-$XERCES_VERSION.tar.xz &&\
 	tar xvJpf xerces-c-$XERCES_VERSION.tar.xz &&\
 	cd xerces-c-$XERCES_VERSION &&\
 	./configure &&\
@@ -142,7 +142,7 @@ RUN wget -t 3 http://www-us.apache.org/dist/xerces/c/3/sources/xerces-c-$XERCES_
 	cd .. &&\
 	rm -rf xerces-c-$XERCES_VERSION*
 
-RUN wget -t 3 http://download.osgeo.org/proj/proj-$PROJ_VERSION.tar.gz -O /tmp/proj-$PROJ_VERSION.tar.gz &&\
+RUN wget -t 3 https://download.osgeo.org/proj/proj-$PROJ_VERSION.tar.gz -O /tmp/proj-$PROJ_VERSION.tar.gz &&\
 	tar xvzpf proj-$PROJ_VERSION.tar.gz &&\
 	cd proj-$PROJ_VERSION &&\
 	./configure &&\
