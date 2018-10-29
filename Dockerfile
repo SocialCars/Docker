@@ -4,11 +4,11 @@ WORKDIR /root
 
 # install TeXLive distribution for documentation (basic) (see for ref: https://github.com/LightJason/Docker/blob/tex/Dockerfile)
 # --- configuration section ----------------------
-ENV GLIBC_VERSION 2.27-r0
+ENV GLIBC_VERSION 2.28-r0
 ENV TEX_SCHEME basic
 
 # --- TeX and apk package dependencies / installation section --------
-RUN wget -t 3 -O /etc/apk/keys/sgerrand.rsa.pub https://raw.githubusercontent.com/sgerrand/alpine-pkg-glibc/master/sgerrand.rsa.pub
+RUN wget -t 3 -O /etc/apk/keys/sgerrand.rsa.pub https://alpine-pkgs.sgerrand.com/sgerrand.rsa.pub
 RUN wget -t 3 -O /tmp/glibc.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-$GLIBC_VERSION.apk
 RUN wget -t 3 -O /tmp/glibc-bin.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-bin-$GLIBC_VERSION.apk
 RUN wget -t 3 -O /tmp/glibc-i18n.apk https://github.com/sgerrand/alpine-pkg-glibc/releases/download/$GLIBC_VERSION/glibc-i18n-$GLIBC_VERSION.apk
