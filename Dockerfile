@@ -7,7 +7,7 @@ ENV SUMO_HOME /opt/sumo
 
 # from https://github.com/docker-library/python/blob/7a794688c7246e7eff898f5288716a3e7dc08484/3.7/alpine3.8/Dockerfile
 ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
-ENV PYTHON_VERSION 3.7.0
+ENV PYTHON_VERSION 3.7.1
 
 RUN set -ex \
 	&& apk add --no-cache --virtual .fetch-deps \
