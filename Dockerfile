@@ -37,4 +37,4 @@ RUN tlmgr install capt-of fncychap framed latexmk needspace tabulary titlesec va
 RUN pip3 install -U --user pylint radon codecov nose &&\
 	pip3 install -U -r https://raw.githubusercontent.com/socialcars/colmto/master/requirements.txt --user
 
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["/bin/bash", "-l", "-c"]
