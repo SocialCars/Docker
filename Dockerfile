@@ -41,5 +41,5 @@ RUN apt-get update -qq \
 	&& rm -rf /tmp/tex \
 	&& pip3 install -U --user pylint radon codecov nose \
 	&& pip3 install -U -r https://raw.githubusercontent.com/socialcars/colmto/master/requirements.txt --user
-
+RUN ln -sf /bin/bash /bin/sh
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
