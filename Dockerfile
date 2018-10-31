@@ -1,4 +1,4 @@
-FROM sumo:ubuntu
+FROM socialcars/docker:sumo
 
 WORKDIR /root
 
