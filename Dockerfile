@@ -10,6 +10,8 @@ ENV GPG_KEY 0D96DF4D4110E5C43FBFB17F2D347EA6AA65421D
 ENV PYTHON_VERSION 3.7.1
 ENV DEBIAN_FRONTEND noninteractive
 #ENV LD_RUN_PATH /usr/local/lib
+ENV LC_ALL en_US.UTF-8
+ENV LANG en_US.UTF-8
 
 COPY "$GPG_KEY".gpg /root/
 
@@ -43,6 +45,12 @@ RUN apt-get update -qq \
 		libxerces-c-dev \
 		libfox-1.6-0 \
 		libfox-1.6-dev \
+		locales \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/* \
+	&& echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+	&& locale-gen en_US.utf8 \
+	&& /usr/sbin/update-locale LANG=en_US.UTF-8 \
 	&& wget -t 3 -O python.tar.xz "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz" \
 	&& wget -t 3 -O python.tar.xz.asc "https://www.python.org/ftp/python/${PYTHON_VERSION%%[a-z]*}/Python-$PYTHON_VERSION.tar.xz.asc" \
 	&& export GNUPGHOME="$(mktemp -d)" \
