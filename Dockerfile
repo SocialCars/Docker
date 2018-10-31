@@ -30,7 +30,7 @@ RUN apt-get update -qq \
 		fonts-mononoki \
 		xz-utils \
 	&& apt-get clean \
-	&& rm -rf /var/lib/apt/lists/*
+	&& rm -rf /var/lib/apt/lists/* \
 # localedef -i en_US -f UTF-8 en_US.UTF-8
 	&& go get -u github.com/tcnksm/ghr \
 	&& mkdir -p /tmp/tex && curl -L http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz --strip 1 -C /tmp/tex \
