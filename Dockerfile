@@ -29,6 +29,8 @@ RUN apt-get update -qq \
 		musl-dev \
 		fonts-mononoki \
 		xz-utils \
+	&& apt-get clean \
+	&& rm -rf /var/lib/apt/lists/*
 # localedef -i en_US -f UTF-8 en_US.UTF-8
 	&& go get -u github.com/tcnksm/ghr \
 	&& mkdir -p /tmp/tex && curl -L http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz | tar xz --strip 1 -C /tmp/tex \
@@ -36,6 +38,7 @@ RUN apt-get update -qq \
 	&& echo "\$pdf_mode  = 1;\\n\$bibtex_use = 2;\\n\$pdflatex  = 'pdflatex -halt-on-error -file-line-error -shell-escape -interaction=nonstopmode -synctex=1 %O %S';\\n\$clean_ext = 'synctex.gz synctex.gz(busy) run.xml xmpi acn acr alg glsdefs vrb bbl ist glg glo gls ist lol log 1 dpth auxlock %R-figure*.* %R-blx.bib snm nav dvi xmpi tdo';\\n\\nadd_cus_dep('glo', 'gls', 0, 'makeglossaries');\\nadd_cus_dep('acn', 'acr', 0, 'makeglossaries');\\nadd_cus_dep('mp', '1', 0, 'mpost');\\n\\nsub makeglossaries {\\nreturn system('makeglossaries', \$_[0]);\\n}\\n\\nsub mpost {\\nmy (\$name, \$path) = fileparse( \$_[0] );\\nmy \$return = system('mpost', \$_[0]);\\nif ( (\$path ne '') && (\$path ne '.\\\\\\\\') && (\$path ne './') ) {\\nforeach ( '\$name.1', '\$name.log' ) { move \$_, \$path; }\\n}\\nreturn \$return;\\n}\\n" > /root/.latexmkrc \
 	&& tlmgr update --self --all --reinstall-forcibly-removed \
 	&& tlmgr install capt-of fncychap framed latexmk needspace tabulary titlesec varwidth wrapfig collection-fontsrecommended \
+	&& rm -rf /tmp/tex \
 	&& pip3 install -U --user pylint radon codecov nose \
 	&& pip3 install -U -r https://raw.githubusercontent.com/socialcars/colmto/master/requirements.txt --user
 
