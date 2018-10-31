@@ -39,7 +39,7 @@ RUN apt-get update -qq \
 	&& tlmgr update --self --all --reinstall-forcibly-removed \
 	&& tlmgr install capt-of fncychap framed latexmk needspace tabulary titlesec varwidth wrapfig collection-fontsrecommended xindy \
 	&& rm -rf /tmp/tex \
-	&& pip3 install -U pylint radon codecov nose \
+	&& pip3 install -U pylint radon codecov nose wheel \
 	&& pip3 install -U -r https://gitlab.com/ascm/colmto/raw/master/requirements.txt
 RUN ln -sf /bin/bash /bin/sh
 ENTRYPOINT ["/bin/bash", "-l", "-c"]
